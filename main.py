@@ -43,7 +43,7 @@ def main_loop(testing=False):
     consoleHandler.setFormatter(logFormatter)
     rootLogger.addHandler(consoleHandler)
 
-    logging.info("Starting main loop")
+    logging.info("******* Starting main loop **********")
 
     while True:
         # Sleep until next interval
@@ -60,12 +60,15 @@ def main_loop(testing=False):
         logging.info(f"Waiting {wait:0.1f} seconds until {next_ts}...")
         sleep(wait)
 
-        logging.info("Taking picture")
-        fp = take_picture()
+        try:
+            logging.info("Taking picture")
+            fp = take_picture()
 
-        logging.info("Uploading to Google Photos")
-        gpm = GooglePhotosManager('/home/pi/projects/garden_timelapse')
-        gpm.upload_photos([fp], "Garden Timelapse")
+            logging.info("Uploading to Google Photos")
+            gpm = GooglePhotosManager('/home/pi/projects/garden_timelapse')
+            gpm.upload_photos([fp], "Garden Timelapse")
+        except Exception as ex:
+            logging.exception("Unable to take picture and save to google")
 
 if __name__ == '__main__':
     main_loop(testing=True)
