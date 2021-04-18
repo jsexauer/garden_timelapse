@@ -7,6 +7,7 @@ import sys
 
 try:
     from picamera import PiCamera
+    cam = PiCamera()
 except ImportError:
     # For testing on computer
     print("No PI Camera")
@@ -19,7 +20,7 @@ now = datetime.datetime.now
 
 def take_picture():
 
-    cam = PiCamera()
+
     cam.start_preview()
     sleep(5) # Must wait a few seconds to let the picam image adjust
     fn = datetime.datetime.now().strftime("%Y-%m-%d_%H%M")
@@ -63,7 +64,7 @@ def main_loop(testing=False):
         fp = take_picture()
 
         logging.info("Uploading to Google Photos")
-        gpm = GooglePhotosManager()
+        gpm = GooglePhotosManager('/home/pi/projects/garden_timelapse')
         gpm.upload_photos([fp], "Garden Timelapse")
 
 if __name__ == '__main__':

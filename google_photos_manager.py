@@ -6,10 +6,13 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import AuthorizedSession
 from google.oauth2.credentials import Credentials
 
+mkpath = os.path.join
+
 class GooglePhotosManager:
     """Modified from: https://github.com/eshmu/gphotos-upload/blob/master/upload.py"""
-    def __init__(self):
+    def __init__(self, basepath):
         self.session = self.get_authorized_session()
+        self.basepath = basepath
 
     def upload_photos(self, photo_file_list, album_name):
 
@@ -125,7 +128,7 @@ class GooglePhotosManager:
 
     def auth(self, scopes):
         flow = InstalledAppFlow.from_client_secrets_file(
-            'client_id_secret.json',
+            mkpath(self.basepath, 'client_id_secret.json'),
             scopes=scopes)
         credentials = flow.run_local_server(host='localhost',
                                             port=8080,
@@ -143,7 +146,7 @@ class GooglePhotosManager:
 
         cred = None
 
-        auth_token_file = 'auth_session_secret.json'
+        auth_token_file = mkpath(self.basepath, 'auth_session_secret.json')
 
         if os.path.isfile(auth_token_file):
             try:
@@ -179,5 +182,5 @@ class GooglePhotosManager:
         return session
 
 if __name__ == '__main__':
-    p = GooglePhotosManager()
+    p = GooglePhotosManager(".")
     print(list(p.get_albums()))
