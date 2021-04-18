@@ -131,3 +131,5 @@ dmypy.json
 /log.txt
 /.idea/
 /auth_session_secret.json
+
+images/
