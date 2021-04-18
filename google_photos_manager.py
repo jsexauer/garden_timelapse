@@ -11,8 +11,9 @@ mkpath = os.path.join
 class GooglePhotosManager:
     """Modified from: https://github.com/eshmu/gphotos-upload/blob/master/upload.py"""
     def __init__(self, basepath):
-        self.session = self.get_authorized_session()
         self.basepath = basepath
+        self.session = self.get_authorized_session()
+
 
     def upload_photos(self, photo_file_list, album_name):
 
