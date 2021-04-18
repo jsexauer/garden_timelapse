@@ -5,6 +5,12 @@ import datetime
 import logging
 import sys
 
+try:
+    from picamera import PiCamera
+except ImportError:
+    # For testing on computer
+    print("No PI Camera")
+
 from time import sleep
 
 from google_photos_manager import GooglePhotosManager
@@ -12,7 +18,6 @@ from google_photos_manager import GooglePhotosManager
 now = datetime.datetime.now
 
 def take_picture():
-    from picamera import PiCamera
 
     cam = PiCamera()
     cam.start_preview()
