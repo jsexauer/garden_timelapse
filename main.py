@@ -35,7 +35,7 @@ def main_loop(testing=False):
     rootLogger = logging.getLogger()
     rootLogger.setLevel(logging.INFO)
 
-    fileHandler = logging.FileHandler("log.txt")
+    fileHandler = logging.FileHandler("/home/pi/projects/garden_timelapse/log.txt")
     fileHandler.setFormatter(logFormatter)
     rootLogger.addHandler(fileHandler)
 
