@@ -71,4 +71,4 @@ def main_loop(testing=False):
             logging.exception("Unable to take picture and save to google")
 
 if __name__ == '__main__':
-    main_loop(testing=False)
+    main_loop(testing=True)
