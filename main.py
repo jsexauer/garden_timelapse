@@ -23,7 +23,7 @@ def take_picture():
 
     cam.start_preview()
     sleep(5) # Must wait a few seconds to let the picam image adjust
-    fn = datetime.datetime.now().strftime("%Y-%m-%d_%H%M")
+    fn = datetime.datetime.now().strftime("%Y-%m-%d_%H%M%S")
     fp = f'/home/pi/projects/garden_timelapse/images/{fn}.jpg'
     cam.capture(fp)
     cam.stop_preview()
@@ -64,9 +64,9 @@ def main_loop(testing=False):
             logging.info("Taking picture")
             fp = take_picture()
 
-            #logging.info("Uploading to Google Photos")
-            #gpm = GooglePhotosManager('/home/pi/projects/garden_timelapse')
-            #gpm.upload_photos([fp], "Garden Timelapse")
+            logging.info("Uploading to Google Photos")
+            gpm = GooglePhotosManager('/home/pi/projects/garden_timelapse')
+            gpm.upload_photos([fp], "Garden Timelapse")
         except Exception as ex:
             logging.exception("Unable to take picture and save to google")
 
