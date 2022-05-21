@@ -8,7 +8,8 @@ import sys
 try:
     from picamera import PiCamera
     cam = PiCamera()
-    cam.resolution = cam.MAX_RESOLUTION
+    #cam.resolution = cam.MAX_RESOLUTION
+    cam.resolution = (1296, 972)
 except ImportError:
     # For testing on computer
     print("No PI Camera")
