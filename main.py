@@ -64,9 +64,9 @@ def main_loop(testing=False):
             logging.info("Taking picture")
             fp = take_picture()
 
-            logging.info("Uploading to Google Photos")
-            gpm = GooglePhotosManager('/home/pi/projects/garden_timelapse')
-            gpm.upload_photos([fp], "Garden Timelapse")
+            #logging.info("Uploading to Google Photos")
+            #gpm = GooglePhotosManager('/home/pi/projects/garden_timelapse')
+            #gpm.upload_photos([fp], "Garden Timelapse")
         except Exception as ex:
             logging.exception("Unable to take picture and save to google")
 
